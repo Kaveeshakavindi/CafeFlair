@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct Home: View {
-    
+    @StateObject var viewModel = CoffeeModel()
+    let columns = [
+           GridItem(.flexible()),
+           GridItem(.flexible()) // Two items per row
+       ]
     var body: some View {
         ScrollView{
             VStack (alignment: .leading, spacing: 15){
@@ -45,16 +49,12 @@ struct Home: View {
                             .foregroundColor(.white)
                             .font(.system(size: 12))
                     }
-                    HStack{
-                        ItemCard()
-                        Spacer()
-                        ItemCard()
+                    LazyVGrid(columns: columns, spacing: 16) {
+                        ForEach(viewModel.coffees, id: \.id) { coffee in
+                            ItemCard(coffee: coffee)
+                        }
                     }
-                    HStack{
-                        ItemCard()
-                        Spacer()
-                        ItemCard()
-                    }
+                    .padding()
                 }
                 
             }
@@ -67,5 +67,8 @@ struct Home: View {
         .navigationBarBackButtonHidden(true)
         //.ignoresSafeArea()
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            viewModel.fetchCoffees()
+        }
     }
 }

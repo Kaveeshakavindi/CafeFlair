@@ -8,27 +8,35 @@
 import SwiftUI
 
 struct ItemCard : View {
-//    var title: String
-//    var description : String
-//    var price : Float
+    var coffee : Coffee
     
     var body: some View {
         VStack{
-            Image("coffee")
-                .resizable()
-                .frame(width: 100, height: 100)
+            AsyncImage(
+                url: URL(string: coffee.imageUrl),
+                content: { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 100, height: 100)
+                        .cornerRadius(8)
+                },
+                placeholder: {
+                    ProgressView()
+                        .frame(width: 100, height: 100)
+                })
             VStack(alignment: .leading){
                 VStack(alignment: .leading){
-                    Text("Nespresso")
+                    Text(coffee.name)
                         .foregroundColor(.white)
                         .font(.system(size: 15, weight: .bold))
-                    Text("Pure Himalyan coffee bean with cream")
+                    Text(coffee.description)
                         .foregroundColor(.white)
                         .font(.system(size:12))
                         .opacity(0.4)
                 }
                 HStack{
-                    Text("LKR 750.00")
+                    Text("USD \(coffee.price)")
                         .foregroundColor(.white)
                         .font(.system(size: 15, weight: .bold))
                     Spacer()

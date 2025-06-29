@@ -2,6 +2,7 @@
 
 A modern iOS coffee ordering app built with SwiftUI, featuring a sleek dark theme and intuitive user experience for discovering and ordering fresh coffee brews.
 
+Cafe Flair API : [Link Text](https://github.com/Kaveeshakavindi/cafeflairApi)
 ## Features
 
 - **Modern SwiftUI Interface**: Clean, responsive design with dark theme
